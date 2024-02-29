@@ -12,7 +12,7 @@ if not os.path.isfile(service_account_path):
 
 cred = credentials.Certificate(service_account_path)
 firebase_app = initialize_app(cred, {
-    "databaseURL": "https://monitor-bot2-default-rtdb.firebaseio.com/"
+    "databaseURL": ""
 })
 firebase_db = db.reference("/users")
 
