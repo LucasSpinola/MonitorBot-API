@@ -1,3 +1,4 @@
 *.env
 *__pycache__/
 *env/
+*app/core/sericeAccountKey.json

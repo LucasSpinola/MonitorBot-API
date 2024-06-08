@@ -2,7 +2,7 @@ pandas
 fastapi
 requests
 gunicorn
-spacy
+spacy>=3.1.1
 uvicorn
 numpy
 python-decouple
@@ -17,3 +17,5 @@ pyjwt
 bcrypt
 python-multipart
 httpx
+schedule
+pyspellchecker

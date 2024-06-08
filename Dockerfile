@@ -7,10 +7,13 @@ WORKDIR /app
 #It copies the framework and the dependencies for the FastAPI application into the working directory
 COPY requirements.txt .
 
+# It will install setuptools
+RUN pip install --upgrade pip setuptools
+
 #It will install the framework and the dependencies in the `requirements.txt` file.
 RUN pip install -r requirements.txt
 
-RUN python -m spacy download pt_core_news_sm
+RUN python -m spacy download pt_core_news_md
 
 #It will copy the remaining files and the source code from the host `fast-api` folder to the `app` container working directory
 COPY . .
