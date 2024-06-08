@@ -1,17 +1,9 @@
 from fastapi import HTTPException, APIRouter, UploadFile, File, Depends, Body
-import json
-import httpx
-from decouple import config
 from app.models.aluno_models import Alunos, AlunoPres, AlunoCadastrar
-import requests
-import pandas as pd
-import io
 from app.services.user_service import get_current_user
 from app.services.alunos_service import criaaluno, editaaluno, deletaaluno, listaalunos, lealuno, buscaaluno, alunosporturma, uparalunos, adicionarid, atualizaid, testarmatricula
 
 alunos_router = APIRouter()
-
-BD_FIRE = config("URL_DB")
 
 @alunos_router.post("/cria_aluno/", summary="Cria um aluno no banco de dados")
 async def cria_aluno(aluno_data: Alunos, current_user: str = Depends(get_current_user)):
