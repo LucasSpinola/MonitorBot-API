@@ -7,22 +7,52 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
+import torch
+from transformers import BertTokenizer, BertForQuestionAnswering
 from app.nlp.text_processing import preprocess_text_advanced
 
+# Carregar modelos necessários
 nlp = spacy.load('pt_core_news_md')
 spell = SpellChecker(language='pt')
 
+# Configurações do banco de dados
 BD_FIRE = config("URL_DB")
+
+# Carregar o modelo BERT
+tokenizer = BertTokenizer.from_pretrained('neuralmind/bert-base-portuguese-cased')
+model = BertForQuestionAnswering.from_pretrained('neuralmind/bert-base-portuguese-cased')
+
+def answer_question(question, context):
+    inputs = tokenizer(question, context, return_tensors='pt')
+    start_scores, end_scores = model(**inputs)
+
+    start_index = torch.argmax(start_scores)
+    end_index = torch.argmax(end_scores) + 1
+
+    answer = tokenizer.convert_tokens_to_string(tokenizer.convert_ids_to_tokens(inputs['input_ids'][0][start_index:end_index]))
+    return answer
 
 def le_perguntas():
     requisicao = requests.get(f'{BD_FIRE}/perguntas/.json')
-    return requisicao.json()
+    dados = requisicao.json()
+    perguntas = []
+    respostas = []
+
+    for id, info in dados.items():
+        if 'pergunta' in info and 'resposta' in info:
+            pergunta = info['pergunta'].strip()
+            resposta = info['resposta'].strip()
+
+            perguntas.append(pergunta)
+            respostas.append(resposta)
+
+    return perguntas, respostas
 
 def extract_keywords_advanced(text):
     doc = nlp(text)
     keywords = []
     for ent in doc.ents:
-        if ent.label_ in ['PERSON', 'ORG', 'GPE']:  
+        if ent.label_ in ['PERSON', 'ORG', 'GPE']:
             keywords.append(ent.text)
     for token in doc:
         if token.pos_ in ['NOUN', 'VERB', 'ADJ']:
@@ -62,17 +92,12 @@ def find_most_similar_index_advanced(query_text, database_texts):
     return best_match_index if best_similarity > 0 else None
 
 def npl_advanced(pergunta):
-    data = le_perguntas()
+    perguntas, respostas = le_perguntas()
     
-    try:
-        lista_perguntas = [data[id]['pergunta'] for id in data if 'pergunta' in data[id]]
-        lista_respostas = [data[id]['resposta'] for id in data if 'resposta' in data[id]]
-    except KeyError:
-        return "Erro: formato de dados inválido."
-    
-    index = find_most_similar_index_advanced(pergunta, lista_perguntas)
+    index = find_most_similar_index_advanced(pergunta, perguntas)
 
     if index is None:
-        return "Lamento, mas parece que não consigo encontrar uma resposta para sua pergunta no momento. Posso tentar ajudar de outra forma ou com uma pergunta diferente, se quiser!"
+        contexto = 'Lamento, mas parece que não consigo encontrar uma resposta para sua pergunta no momento. Posso tentar ajudar de outra forma ou com uma pergunta diferente, se quiser!'
+        return answer_question(pergunta, contexto)
 
-    return lista_respostas[index]
+    return respostas[index]

@@ -27,7 +27,7 @@ async def nlppergunta(pergunta: NLPCreate = Body(...)):
 
     return resposta
 
-async def avaliarrespostaaluno(resposta: RespostaAluno = Body(...)):
+async def avaliarrespostaaluno(resposta):
     requisicao = requests.get(f'{BD_FIRE}/presencas/{resposta.sigla}/.json')
     if requisicao.status_code != 200:
         raise HTTPException(status_code=500, detail="Erro ao acessar os dados de presença")
@@ -41,6 +41,8 @@ async def avaliarrespostaaluno(resposta: RespostaAluno = Body(...)):
                 "numero_gabarito": resposta.numero_gabarito,
                 "resposta": resposta.resposta_aluno
             })
+            
+            resultado_final["similaridade"] = float(resultado_final["similaridade"])
             
             json_teste = json.dumps(resultado_final)
             add_resposta = requests.patch(f'{BD_FIRE}/presencas/{resposta.sigla}/{id}/narrativo/{resposta.numero_gabarito}/.json', data=json_teste)
