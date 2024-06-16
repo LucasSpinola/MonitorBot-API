@@ -12,7 +12,7 @@ class Settings(BaseSettings):
         "http://localhost:3000",
     ]
     PROJECT_NAME: str = "MonitorBot"
-
+    
     class Config:
         case_sensitive = True
 

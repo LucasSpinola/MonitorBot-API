@@ -23,6 +23,8 @@ from app.api.handler import permissao
 from app.api.handler.permissao import permissao_router
 from app.api.handler import whatsapp
 from app.api.handler.whatsapp import whatsapp_router
+from app.api.handler import dataviwer
+from app.api.handler.dataviwer import dataviwer_router
 
 
 router = APIRouter()
@@ -97,4 +99,10 @@ router.include_router(
     whatsapp.whatsapp_router,
     prefix="/whatsapp",
     tags=["Whatsapp"]
+    )
+
+router.include_router(
+    dataviwer.dataviwer_router,
+    prefix="/dataviwer",
+    tags=["DataViwer"]
     )

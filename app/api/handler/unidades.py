@@ -1,9 +1,11 @@
+import pandas as pd
 from fastapi import UploadFile, File, APIRouter, Depends
 from app.api.handler.user import get_current_user
 from app.models.unidade_models import Unidade
 from app.services.unidades_service import criarunidade, editarunidade, obterunidadespordata, uparunidades, deletarunidade, obterlistaunidades, obteridunidade
 
 unidades_router = APIRouter()
+
 
 @unidades_router.post("/criar_unidade/{sigla}")
 async def criarunidade_endpoint(sigla: str, unidade: Unidade, current_user: str = Depends(get_current_user)):
@@ -28,6 +30,7 @@ async def upar_unidades(sigla: str, file: UploadFile = File(...), current_user: 
 @unidades_router.get("/lista_unidade/{sigla}")
 async def obter_lista_unidades(sigla: str, current_user: str = Depends(get_current_user)):
     return await obterlistaunidades(sigla)
+
 
 @unidades_router.get("/id_unidade/{sigla}/{data}")
 async def obter_id_unidade(sigla: str, data: str, current_user: str = Depends(get_current_user)):

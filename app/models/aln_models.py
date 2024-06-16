@@ -10,3 +10,4 @@ class RespostaAluno(BaseModel):
     sigla: str
     numero_gabarito: int
     resposta_aluno: str
+    

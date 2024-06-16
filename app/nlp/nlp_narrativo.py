@@ -1,9 +1,8 @@
 import spacy
-from app.nlp.text_processing import preprocess_text
 from decouple import config
 import requests
 
-nlp = spacy.load('pt_core_news_sm')
+nlp = spacy.load('pt_core_news_md')
 
 BD_FIRE = config("URL_DB")
 
