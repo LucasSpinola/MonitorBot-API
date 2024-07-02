@@ -25,6 +25,8 @@ from app.api.handler import whatsapp
 from app.api.handler.whatsapp import whatsapp_router
 from app.api.handler import dataviwer
 from app.api.handler.dataviwer import dataviwer_router
+from app.api.handler import web
+from app.api.handler.web import web_router
 
 
 router = APIRouter()
@@ -105,4 +107,10 @@ router.include_router(
     dataviwer.dataviwer_router,
     prefix="/dataviwer",
     tags=["DataViwer"]
+    )
+
+router.include_router(
+    web.web_router,
+    prefix="/web",
+    tags=["Web"]
     )
