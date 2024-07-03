@@ -2,7 +2,7 @@ from fastapi import Depends, Form, HTTPException, APIRouter
 import json
 import httpx
 from decouple import config
-from app.models.pergunta_models import Pergunta
+from models.pergunta_models import Pergunta
 
 BD_FIRE = config("URL_DB")
 

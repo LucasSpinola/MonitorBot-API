@@ -1,7 +1,7 @@
 from fastapi import Depends, APIRouter
-from app.models.turma_models import TurmaCreate
-from app.services.user_service import get_current_user
-from app.services.turma_services import criaturma, editarturmas, listarturmas, lerturma, turmaporprofessor, numeroalunosturma, deletarturma
+from models.turma_models import TurmaCreate
+from services.user_service import get_current_user
+from services.turma_services import criaturma, editarturmas, listarturmas, lerturma, turmaporprofessor, numeroalunosturma, deletarturma
 
 turmas_router = APIRouter()
 

@@ -2,10 +2,10 @@ from fastapi import HTTPException, APIRouter, Depends
 import json
 import httpx
 from decouple import config
-from app.models.presenca_models import PresencaCreate, MarcarPresenca, PresencaGet, PresencaEdit
+from models.presenca_models import PresencaCreate, MarcarPresenca, PresencaGet, PresencaEdit
 from datetime import datetime
-from app.services.user_service import get_current_user
-from app.services.turma_services import turmaporprofessor
+from services.user_service import get_current_user
+from services.turma_services import turmaporprofessor
 import datetime
 
 BD_FIRE = config("URL_DB")

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
-from app.services.miniteste_service import criaminiteste, obterminiteste, adicionarrespostaaluno, editarminiteste, obterrespostasminitestealuno, obterrespostasminitestealunos, deletarminiteste
-from app.models.miniteste_models import Miniteste, MinitesteResposta
-from app.services.user_service import get_current_user
+from services.miniteste_service import criaminiteste, obterminiteste, adicionarrespostaaluno, editarminiteste, obterrespostasminitestealuno, obterrespostasminitestealunos, deletarminiteste
+from models.miniteste_models import Miniteste, MinitesteResposta
+from services.user_service import get_current_user
 
 miniteste_router = APIRouter()
 

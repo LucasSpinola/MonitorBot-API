@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from decouple import config
-from app.models.aln_models import Narrativo
+from models.aln_models import Narrativo
 import requests
 import httpx
 

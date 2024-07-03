@@ -4,7 +4,7 @@ import json
 import requests
 import json
 from decouple import config
-from app.models.miniteste_models import Miniteste, MinitesteResposta
+from models.miniteste_models import Miniteste, MinitesteResposta
 import httpx
 from fastapi import HTTPException
 

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
-from app.models.permissao_models import Permissao
-from app.services.user_service import get_current_user
-from app.services.permissao_service import criapermissao, editarpermissao, excluirpermissao, pegarusuariocompermissao, listatodosusuarioscompermissao
+from models.permissao_models import Permissao
+from services.user_service import get_current_user
+from services.permissao_service import criapermissao, editarpermissao, excluirpermissao, pegarusuariocompermissao, listatodosusuarioscompermissao
 
 permissao_router = APIRouter()
 

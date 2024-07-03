@@ -1,7 +1,7 @@
 from fastapi import Depends, APIRouter
-from app.services.user_service import get_current_user
-from app.models.pergunta_models import Pergunta
-from app.services.pergunta_service import criapergunta, editapergunta, deletapergunta, listaperguntas, lepergunta
+from services.user_service import get_current_user
+from models.pergunta_models import Pergunta
+from services.pergunta_service import criapergunta, editapergunta, deletapergunta, listaperguntas, lepergunta
 
 perguntas_router = APIRouter()
 

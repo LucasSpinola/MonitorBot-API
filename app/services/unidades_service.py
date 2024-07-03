@@ -1,6 +1,6 @@
 from fastapi import UploadFile, File, APIRouter, HTTPException, Depends
 import requests
-from app.models.unidade_models import Unidade
+from models.unidade_models import Unidade
 from decouple import config
 import pandas as pd
 import io

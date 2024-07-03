@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Body, Depends, APIRouter
-from app.models.user_model import User, UserLogin
-from app.services.user_service import get_current_user, user_signup, user_login, profile_web
+from models.user_model import User, UserLogin
+from services.user_service import get_current_user, user_signup, user_login, profile_web
 
 user_router = APIRouter()
 

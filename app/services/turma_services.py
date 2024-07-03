@@ -2,7 +2,7 @@
 from fastapi import HTTPException
 import json
 import httpx
-from app.models.turma_models import TurmaCreate
+from models.turma_models import TurmaCreate
 from decouple import config
 import httpx
 

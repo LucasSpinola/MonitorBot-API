@@ -1,12 +1,12 @@
 from fastapi import Body, HTTPException
 from decouple import config
-from app.models.nlp_models import NLPCreate
-from app.models.logs_models import LogsCreate
-from app.models.aln_models import Narrativo, RespostaAluno
+from models.nlp_models import NLPCreate
+from models.logs_models import LogsCreate
+from models.aln_models import Narrativo, RespostaAluno
 import datetime
-from app.nlp.nlp import npl_advanced
-from app.api.handler.logs import logs
-from app.nlp.nlp_narrativo import nlp_motor
+from nlp.nlp import npl_advanced
+from api.handler.logs import logs
+from nlp.nlp_narrativo import nlp_motor
 import requests
 import json
 from fastapi.responses import JSONResponse

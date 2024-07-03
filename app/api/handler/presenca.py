@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
-from app.models.presenca_models import PresencaCreate, MarcarPresenca, PresencaGet, PresencaEdit
-from app.services.user_service import get_current_user
-from app.services.presenca_service import cadastrarpresenca, obterpresencas, editarpresenca, obterfrequenciadiaria, obterfrequencias, marcarpresenca
+from models.presenca_models import PresencaCreate, MarcarPresenca, PresencaGet, PresencaEdit
+from services.user_service import get_current_user
+from services.presenca_service import cadastrarpresenca, obterpresencas, editarpresenca, obterfrequenciadiaria, obterfrequencias, marcarpresenca
 
 presenca_router = APIRouter()
 
