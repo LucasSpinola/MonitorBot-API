@@ -1,9 +1,9 @@
 import requests
 import json
 from decouple import config
-from app.models.whatsapp_models import WhatsappCreate, WhatsappMatricula
+from models.whatsapp_models import WhatsappCreate, WhatsappMatricula
 from fastapi import HTTPException
-from app.api.auth.jwt_bearer import JWTBearer
+from api.auth.jwt_bearer import JWTBearer
 
 BD_FIRE = config("URL_DB")
 

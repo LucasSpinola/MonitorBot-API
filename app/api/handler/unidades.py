@@ -1,8 +1,8 @@
 import pandas as pd
 from fastapi import UploadFile, File, APIRouter, Depends
-from app.api.handler.user import get_current_user
-from app.models.unidade_models import Unidade
-from app.services.unidades_service import criarunidade, editarunidade, obterunidadespordata, uparunidades, deletarunidade, obterlistaunidades, obteridunidade
+from handler.user import get_current_user
+from models.unidade_models import Unidade
+from services.unidades_service import criarunidade, editarunidade, obterunidadespordata, uparunidades, deletarunidade, obterlistaunidades, obteridunidade
 
 unidades_router = APIRouter()
 
