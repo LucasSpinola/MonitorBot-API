@@ -1,32 +1,32 @@
 from fastapi import APIRouter
-from handler import user
-from handler.user import user_router
-from handler.unidades import unidades_router
-from handler import unidades
-from handler import turmas
-from handler.turmas import turmas_router
-from handler import presenca
-from handler.presenca import presenca_router
-from handler import perguntas
-from handler.perguntas import perguntas_router
-from handler import logs
-from handler.logs import logs_router
-from handler import aluno
-from handler.aluno import alunos_router
-from handler import nlp
-from handler.nlp import nlp_router
-from handler import miniteste
-from handler.miniteste import miniteste_router
-from handler import aln
-from handler.aln import aln_router
-from handler import permissao
-from handler.permissao import permissao_router
-from handler import whatsapp
-from handler.whatsapp import whatsapp_router
-from handler import dataviwer
-from handler.dataviwer import dataviwer_router
-from handler import web
-from handler.web import web_router
+from app.api.handler import user
+from app.api.handler.user import user_router
+from app.api.handler.unidades import unidades_router
+from app.api.handler import unidades
+from app.api.handler import turmas
+from app.api.handler.turmas import turmas_router
+from app.api.handler import presenca
+from app.api.handler.presenca import presenca_router
+from app.api.handler import perguntas
+from app.api.handler.perguntas import perguntas_router
+from app.api.handler import logs
+from app.api.handler.logs import logs_router
+from app.api.handler import aluno
+from app.api.handler.aluno import alunos_router
+from app.api.handler import nlp
+from app.api.handler.nlp import nlp_router
+from app.api.handler import miniteste
+from app.api.handler.miniteste import miniteste_router
+from app.api.handler import aln
+from app.api.handler.aln import aln_router
+from app.api.handler import permissao
+from app.api.handler.permissao import permissao_router
+from app.api.handler import whatsapp
+from app.api.handler.whatsapp import whatsapp_router
+from app.api.handler import dataviwer
+from app.api.handler.dataviwer import dataviwer_router
+from app.api.handler import web
+from app.api.handler.web import web_router
 
 
 router = APIRouter()
@@ -107,10 +107,4 @@ router.include_router(
     dataviwer.dataviwer_router,
     prefix="/dataviwer",
     tags=["DataViwer"]
-    )
-
-router.include_router(
-    web.web_router,
-    prefix="/web",
-    tags=["Web"]
     )

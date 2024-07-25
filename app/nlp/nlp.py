@@ -9,8 +9,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
 import torch
 from transformers import BertTokenizer, BertForQuestionAnswering
-from nlp.text_processing import preprocess_text_advanced
-
+from app.nlp.text_processing import preprocess_text_advanced
 # Carregar modelos necessários
 nlp = spacy.load('pt_core_news_md')
 spell = SpellChecker(language='pt')

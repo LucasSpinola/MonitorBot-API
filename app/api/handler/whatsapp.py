@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
-from api.handler.user import get_current_user
-from models.whatsapp_models import WhatsappCreate, WhatsappMatricula
-from services.whatsapp_service import adicionar_numero, excluir_numero, editar_numero, obter_telefone
+from app.api.handler.user import get_current_user
+from app.models.whatsapp_models import WhatsappCreate, WhatsappMatricula
+from app.services.whatsapp_service import adicionar_numero, excluir_numero, editar_numero, obter_telefone
 
 whatsapp_router = APIRouter()
 

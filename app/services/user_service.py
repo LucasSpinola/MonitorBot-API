@@ -2,12 +2,12 @@ from firebase_admin import db
 from passlib.context import CryptContext
 import bcrypt
 from fastapi import HTTPException, Depends
-from api.auth.jwt_bearer import JWTBearer
+from app.api.auth.jwt_bearer import JWTBearer
 from fastapi import FastAPI, Body, Depends, HTTPException, APIRouter
-from models.user_model import User, UserLogin
-from api.auth.jwt_bearer import JWTBearer
-from api.auth.jwt_handler import signJWT
-from core.database import add_user_to_firebase
+from app.models.user_model import User, UserLogin
+from app.api.auth.jwt_bearer import JWTBearer
+from app.api.auth.jwt_handler import signJWT
+from app.core.database import add_user_to_firebase
 
 password_context = CryptContext(
     schemes=["bcrypt"],

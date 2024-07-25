@@ -2,7 +2,7 @@ from fastapi import HTTPException, UploadFile, File
 import json
 import httpx
 from decouple import config
-from models.aluno_models import Alunos, AlunoPres, AlunoCadastrar
+from app.models.aluno_models import Alunos, AlunoPres, AlunoCadastrar
 import requests
 import pandas as pd
 import io

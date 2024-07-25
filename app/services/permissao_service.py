@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, Depends
 from decouple import config
-from models.permissao_models import Permissao
+from app.models.permissao_models import Permissao
 import requests
-from services.user_service import get_current_user
+from app.services.user_service import get_current_user
 
 BD_FIRE = config("URL_DB")
 

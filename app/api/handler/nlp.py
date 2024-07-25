@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Body, Depends
 from decouple import config
-from models.nlp_models import NLPCreate
-from models.aln_models import Narrativo, RespostaAluno
-from services.user_service import get_current_user
-from services.nlp_service import nlppergunta, avaliarrespostaaluno
+from app.models.nlp_models import NLPCreate
+from app.models.aln_models import Narrativo, RespostaAluno
+from app.services.user_service import get_current_user
+from app.services.nlp_service import nlppergunta, avaliarrespostaaluno
 
 nlp_router = APIRouter()
 

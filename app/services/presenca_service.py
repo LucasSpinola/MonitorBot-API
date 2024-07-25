@@ -1,8 +1,11 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import HTTPException, APIRouter, Depends
+import json
+import httpx
 from decouple import config
-from models.permissao_models import Permissao
-import requests
-from services.user_service import get_current_user
+from app.models.presenca_models import PresencaCreate, MarcarPresenca, PresencaGet, PresencaEdit
+from datetime import datetime
+from app.services.user_service import get_current_user
+import datetime
 
 BD_FIRE = config("URL_DB")
 

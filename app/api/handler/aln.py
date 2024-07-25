@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
-from models.aln_models import Narrativo
-from services.user_service import get_current_user
-from services.narrativo_service import crianarrativo, lerpergunta, editarnarrativo, deletarnarrativo, listanarrativos, pegarnarrativo
+from app.models.aln_models import Narrativo
+from app.services.user_service import get_current_user
+from app.services.narrativo_service import crianarrativo, lerpergunta, editarnarrativo, deletarnarrativo, listanarrativos, pegarnarrativo
 
 aln_router = APIRouter()
 

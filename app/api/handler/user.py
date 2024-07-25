@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Body, Depends, APIRouter
-from models.user_model import User, UserLogin
-from services.user_service import get_current_user, user_signup, user_login, profile_web
+from app.models.user_model import User, UserLogin
+from app.services.user_service import get_current_user, user_signup, user_login, profile_web
 
 user_router = APIRouter()
 
 @user_router.post('/adiciona', summary='Adiciona usuário')
-async def usersignup(user: User = Body(default=None)):
+async def usersignup(user: User = Body(default=None), current_user: str = Depends(get_current_user)):
     return user_signup(user)
 
 @user_router.post('/login', summary='Login do usuário')

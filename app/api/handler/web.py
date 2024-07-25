@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Body, Depends, APIRouter, HTTPException
-from models.user_model import User, UserLogin
-from services.web_service import obter_alunos_sem_presenca, obter_respostas_mini_teste_alunos, numero_de_turmas_professor, contar_alunos_professor, contar_alunos_sem_miniteste, contar_alunos_sem_frequencia
-from services.turma_services import turmaporprofessor
+from app.models.user_model import User, UserLogin
+from app.services.web_service import obter_alunos_sem_presenca, obter_respostas_mini_teste_alunos, numero_de_turmas_professor, contar_alunos_professor, contar_alunos_sem_miniteste, contar_alunos_sem_frequencia
+from app.services.turma_services import turmaporprofessor
 
 
 web_router = APIRouter()

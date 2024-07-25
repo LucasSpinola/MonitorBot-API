@@ -1,8 +1,9 @@
 from fastapi import HTTPException
 from decouple import config
-from models.aln_models import Narrativo
+from app.models.aln_models import Narrativo
 import requests
 import httpx
+
 
 BD_FIRE = config("URL_DB")
 

@@ -1,6 +1,6 @@
 from fastapi import HTTPException, APIRouter, UploadFile, File, Depends, Body
-from services.user_service import get_current_user
-from services.dataviwer_service import obterrespostasminitestealunosdata
+from app.services.user_service import get_current_user
+from app.services.dataviwer_service import obterrespostasminitestealunosdata
 
 dataviwer_router = APIRouter()
 

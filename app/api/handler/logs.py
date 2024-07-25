@@ -1,8 +1,8 @@
 from fastapi import Depends, APIRouter
-from models.logs_models import LogsCreate
-from services.user_service import get_current_user
-from services.logs_service import logs, deletarlogs, listalogs, lelogs, responderlog
-from models.pergunta_models import Pergunta
+from app.models.logs_models import LogsCreate
+from app.services.user_service import get_current_user
+from app.services.logs_service import logs, deletarlogs, listalogs, lelogs, responderlog
+from app.models.pergunta_models import Pergunta
 
 logs_router = APIRouter()
 
