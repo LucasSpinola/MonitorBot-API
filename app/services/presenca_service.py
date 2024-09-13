@@ -87,9 +87,12 @@ async def editarpresenca(presenca: PresencaEdit):
                 frequencia = presenca_data.get("frequencia", {})
                 if presenca.data in frequencia:
                     presenca_encontrada = True
+                    # Se a frequência para a data específica for uma string, converta para lista
                     if isinstance(frequencia[presenca.data], str):
                         frequencia[presenca.data] = [frequencia[presenca.data]]
-                    frequencia[presenca.data].append(presenca.presenca)
+                    
+                    # Substitua a presença existente na data específica
+                    frequencia[presenca.data] = [presenca.presenca]
                     presenca_data["frequencia"] = frequencia
 
                     requisicao_atualizacao = await client.put(f'{BD_FIRE}/presencas/{presenca.sigla}/{presenca_id}.json', json=presenca_data)
@@ -98,10 +101,6 @@ async def editarpresenca(presenca: PresencaEdit):
                         return {"mensagem": f"Presença para a data {presenca.data} atualizada com sucesso"}
                     else:
                         raise HTTPException(status_code=500, detail=f"Erro ao atualizar a presença para a data {presenca.data}")
-
-        if not presenca_encontrada:
-            raise HTTPException(status_code=404, detail="Presença não encontrada para a matrícula e data especificadas")
-
 
         if not presenca_encontrada:
             raise HTTPException(status_code=404, detail=f"Presença não encontrada para a matrícula {presenca.matricula} e data {presenca.data} nesta disciplina")

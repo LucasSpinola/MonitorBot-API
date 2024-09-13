@@ -88,6 +88,7 @@ def user_login(user_login: UserLogin = Body(default=None)):
 def profile_web(user_login: UserLogin = Body(default=None)):
     found, username, id_discord = check_user_in_firebase(user_login)
     if found:
-        return {"id_discord": id_discord, "username": username}
+        return {"id_discord": id_discord, "username": username, "email": user_login.email}
     else:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    

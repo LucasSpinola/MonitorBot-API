@@ -17,8 +17,8 @@ async def ler_pergunta(numero: int, current_user: str = Depends(get_current_user
 async def editar_narrativo(numero: int, novo_narrativo: Narrativo, current_user: str = Depends(get_current_user)):
     return await editarnarrativo(numero, novo_narrativo)
 
-@aln_router.delete("/deletar_narrativo/{numero}", summary="Deleta um narrativo existente pelo número")
-async def deletar_narrativo(numero: int, current_user: str = Depends(get_current_user)):
+@aln_router.delete("/deletar_narrativo/{numero}", summary="Exclui um narrativo pelo número")
+async def excluir_narrativo(numero: int, current_user: str = Depends(get_current_user)):
     return await deletarnarrativo(numero)
 
 @aln_router.get("/lista_narrativos/", summary="Lista todos os narrativos existentes")

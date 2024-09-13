@@ -114,3 +114,17 @@ async def deletarminiteste(miniteste_id: str):
         raise HTTPException(status_code=404, detail="Miniteste não encontrado")
     else:
         raise HTTPException(status_code=500, detail="Erro ao deletar miniteste")
+    
+async def listar_minitestes():
+    try:
+        url_minitestes = f'{BD_FIRE}/minitestes/.json'
+        requisicao = requests.get(url_minitestes)
+        
+        if requisicao.status_code == 200:
+            minitestes = requisicao.json()
+            return minitestes
+        else:
+            raise HTTPException(status_code=requisicao.status_code, detail=f"Erro ao listar minitestes - Mensagem de erro: {requisicao.text}")
+
+    except requests.RequestException as e:
+        raise HTTPException(status_code=500, detail=str(e))

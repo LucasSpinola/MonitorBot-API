@@ -2,8 +2,7 @@ import spacy
 from spacy.tokens import Token
 import re
 
-
-nlp = spacy.load('pt_core_news_md')  # Carregar o modelo do spaCy
+nlp = spacy.load('pt_core_news_sm')
 
 def preprocess_text_advanced(text):
     doc = nlp(text)

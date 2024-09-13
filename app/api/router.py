@@ -108,3 +108,9 @@ router.include_router(
     prefix="/dataviwer",
     tags=["DataViwer"]
     )
+
+router.include_router(
+    web.web_router,
+    prefix="/web",
+    tags=["Web"]
+    )

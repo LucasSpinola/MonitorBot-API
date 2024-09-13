@@ -6,6 +6,7 @@ class Alunos(BaseModel):
     turma: str
     sub_turma: str
     id_discord: str
+    telefone: str 
 
 class AlunoPres(BaseModel):
     nome: str

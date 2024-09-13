@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.services.miniteste_service import criaminiteste, obterminiteste, adicionarrespostaaluno, editarminiteste, obterrespostasminitestealuno, obterrespostasminitestealunos, deletarminiteste
+from app.services.miniteste_service import criaminiteste, obterminiteste, adicionarrespostaaluno, editarminiteste, obterrespostasminitestealuno, obterrespostasminitestealunos, deletarminiteste, listar_minitestes
 from app.models.miniteste_models import Miniteste, MinitesteResposta
 from app.services.user_service import get_current_user
 
@@ -29,6 +29,10 @@ async def obter_respostas_miniteste_aluno(sigla: str, matricula: int, current_us
 async def obter_respostas_miniteste_alunos(sigla: str, current_user: str = Depends(get_current_user)):
     return await obterrespostasminitestealunos(sigla)
 
-@miniteste_router.delete("/{miniteste_id}", summary="Deletar miniteste")
+@miniteste_router.delete("/deletar/{miniteste_id}", summary="Deletar miniteste")
 async def deletar_miniteste(miniteste_id: str, current_user: str = Depends(get_current_user)):
     return await deletarminiteste(miniteste_id)
+
+@miniteste_router.get("/listar_minitestes/", summary="Listar minitestes")
+async def lista_minitestes(current_user: str = Depends(get_current_user)):
+    return await listar_minitestes()

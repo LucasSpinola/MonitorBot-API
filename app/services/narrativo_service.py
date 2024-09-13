@@ -4,7 +4,6 @@ from app.models.aln_models import Narrativo
 import requests
 import httpx
 
-
 BD_FIRE = config("URL_DB")
 
 async def crianarrativo(narrativo: Narrativo):
@@ -35,24 +34,39 @@ async def lerpergunta(numero: int):
 async def editarnarrativo(numero: int, novo_narrativo: Narrativo):
     novo_narrativo_dict = novo_narrativo.dict()
     requisicao = requests.get(f'{BD_FIRE}/narrativo/.json')
-    for id in requisicao.json():
-        if numero == requisicao.json()[id]['numero']:
+    narrativos = requisicao.json()
+    
+    for id, narrativo in narrativos.items():
+        if numero == narrativo['numero']:
             requisicao = requests.patch(f'{BD_FIRE}/narrativo/{id}.json', json=novo_narrativo_dict)
             if requisicao.status_code == 200:
                 return {"mensagem": "Narrativo editado com sucesso"}
             else:
                 return {"mensagem": "Erro ao editar narrativo"}
+    
     raise HTTPException(status_code=404, detail="Número não encontrado no banco de dados")
 
 async def deletarnarrativo(numero: int):
-    requisicao = requests.get(f'{BD_FIRE}/narrativo.json')
-    for id in requisicao.json():
-        if numero == requisicao.json()[id]['numero']:
-            requisicao = requests.delete(f'{BD_FIRE}/narrativo/{id}.json')
-            if requisicao.status_code == 200:
+    # Obtém todos os narrativos
+    try:
+        requisicao = requests.get(f'{BD_FIRE}/narrativo.json')
+        requisicao.raise_for_status()  # Levanta uma exceção para erros de solicitação HTTP
+        narrativos = requisicao.json()
+    except requests.RequestException as e:
+        raise HTTPException(status_code=500, detail=f"Erro ao acessar o banco de dados: {e}")
+    
+    # Procura o narrativo com o número especificado
+    for id, narrativo in narrativos.items():
+        if narrativo.get('numero') == numero:
+            # Realiza a exclusão do narrativo
+            try:
+                requisicao_delete = requests.delete(f'{BD_FIRE}/narrativo/{id}.json')
+                requisicao_delete.raise_for_status()  # Levanta uma exceção para erros de solicitação HTTP
                 return {"mensagem": "Narrativo deletado com sucesso"}
-            else:
-                return {"mensagem": "Erro ao deletar narrativo"}
+            except requests.RequestException as e:
+                return {"mensagem": f"Erro ao deletar narrativo: {e}"}
+    
+    # Se não encontrar o narrativo com o número especificado
     raise HTTPException(status_code=404, detail="Número não encontrado no banco de dados")
 
 async def listanarrativos():

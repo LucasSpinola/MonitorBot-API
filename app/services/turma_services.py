@@ -8,18 +8,29 @@ import httpx
 BD_FIRE = config("URL_DB")
 
 async def criaturma(turma_data: TurmaCreate):
-    url = f'{BD_FIRE}/turmas/{turma_data.sigla}/.json'
+    url_turma = f'{BD_FIRE}/turmas/{turma_data.sigla}/.json'
+    url_unidade = f'{BD_FIRE}/unidades/{turma_data.sigla}/.json'
+    
     data_dict = turma_data.dict()
     data_dict.pop('sigla')
     json_turma = json.dumps(data_dict)
+    
     async with httpx.AsyncClient() as client:
         try:
-            requisicao = await client.post(url, data=json_turma)
-            if requisicao.status_code // 100 == 2:
-                return {"mensagem": f"Turma <{turma_data.sigla}> criada com sucesso"}
+            # Criação da turma
+            requisicao_turma = await client.post(url_turma, data=json_turma)
+            if requisicao_turma.status_code // 100 == 2:
+                # Criação da unidade
+                json_unidade = json.dumps({"nome": turma_data.sigla})
+                requisicao_unidade = await client.post(url_unidade, data=json_unidade)
+                
+                if requisicao_unidade.status_code // 100 == 2:
+                    return {"mensagem": f"Turma e unidade <{turma_data.sigla}> criadas com sucesso"}
+                else:
+                    raise HTTPException(status_code=500, detail=f"Erro ao criar a unidade <{turma_data.sigla}>")
             else:
                 raise HTTPException(status_code=500, detail=f"Erro ao criar a turma <{turma_data.sigla}>")
-        except httpx.HTTPError as http_err:
+        except httpx.HTTPError:
             raise HTTPException(status_code=501, detail=f"Erro de conexão")
 
 async def editarturmas(sigla: str, turma_data: TurmaCreate):
